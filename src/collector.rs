@@ -2,10 +2,8 @@ use std::{
     path::{Path, PathBuf},
     sync::mpsc,
 };
-use petgraph::{Graph};
 
 use crate::message::Message;
-use std::collections::HashMap;
 pub type CollectorTuple = (PathBuf, Vec<String>);
 pub type CollectorSender = mpsc::Sender<Option<CollectorTuple>>;
 pub type CollectorReceiver = mpsc::Receiver<Option<CollectorTuple>>;
@@ -29,7 +27,6 @@ impl Default for CollectorService {
 }
 
 impl CollectorService {
-
     pub fn sender(&self) -> &CollectorSender {
         &self.sender
     }
@@ -39,7 +36,6 @@ impl CollectorService {
                 self.deps.push((path.display().to_string(), dep));
             }
         }
-
     }
 
     pub fn wrap_messages(path: &Path, messages: Vec<Message>) -> CollectorTuple {
